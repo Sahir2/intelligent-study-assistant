@@ -29,9 +29,7 @@ os.makedirs(RESULTS_DIR, exist_ok=True)
 sns.set_style("whitegrid")
 
 
-# ---------------------------------------------------------------------------
 # 1. EDA: Class distribution
-# ---------------------------------------------------------------------------
 def plot_class_distribution(df: pd.DataFrame) -> None:
     counts = df["category"].value_counts()
     plt.figure(figsize=(7, 5))
@@ -50,9 +48,7 @@ def plot_class_distribution(df: pd.DataFrame) -> None:
     print(f"Saved: {out}")
 
 
-# ---------------------------------------------------------------------------
 # 2. EDA: Question length distribution per class
-# ---------------------------------------------------------------------------
 def plot_question_length(df: pd.DataFrame) -> None:
     df = df.copy()
     df["word_count"] = df["question_clean"].str.split().str.len()
@@ -74,9 +70,7 @@ def plot_question_length(df: pd.DataFrame) -> None:
     print(f"Saved: {out}")
 
 
-# ---------------------------------------------------------------------------
 # 3. EDA: Top words per class
-# ---------------------------------------------------------------------------
 STOPWORDS = {
     "the", "a", "an", "of", "to", "in", "on", "and", "or", "is",
     "are", "was", "were", "be", "by", "for", "with", "as", "it",
@@ -107,9 +101,7 @@ def plot_top_words(df: pd.DataFrame, top_n: int = 10) -> None:
     print(f"Saved: {out}")
 
 
-# ---------------------------------------------------------------------------
 # 4. Results: Accuracy comparison
-# ---------------------------------------------------------------------------
 def plot_accuracy_comparison(metrics: dict) -> None:
     models = ["Naive Bayes", "Logistic Regression"]
     accuracies = [metrics["nb_accuracy"], metrics["lr_accuracy"]]
@@ -131,9 +123,7 @@ def plot_accuracy_comparison(metrics: dict) -> None:
     print(f"Saved: {out}")
 
 
-# ---------------------------------------------------------------------------
 # 5. Results: Confusion matrices side by side
-# ---------------------------------------------------------------------------
 def plot_confusion_matrices(metrics: dict, labels: list) -> None:
     nb_cm = np.array(metrics["nb_confusion_matrix"])
     lr_cm = np.array(metrics["lr_confusion_matrix"])
@@ -158,9 +148,7 @@ def plot_confusion_matrices(metrics: dict, labels: list) -> None:
     print(f"Saved: {out}")
 
 
-# ---------------------------------------------------------------------------
 # Main
-# ---------------------------------------------------------------------------
 def main() -> None:
     df = load_data()
     bundle = load_trained_models()

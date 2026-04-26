@@ -35,9 +35,8 @@ from sklearn.metrics import (
 
 warnings.filterwarnings("ignore")
 
-# ---------------------------------------------------------------------------
 # Paths
-# ---------------------------------------------------------------------------
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_PATH = os.path.join(BASE_DIR, "data", "dataset.csv")
 RESULTS_DIR = os.path.join(BASE_DIR, "results")
@@ -45,9 +44,7 @@ MODELS_PATH = os.path.join(RESULTS_DIR, "trained_models.pkl")
 os.makedirs(RESULTS_DIR, exist_ok=True)
 
 
-# ---------------------------------------------------------------------------
 # Preprocessing
-# ---------------------------------------------------------------------------
 def clean_text(text: str) -> str:
     """Lowercase, strip punctuation, and collapse whitespace."""
     text = str(text).lower()
@@ -64,9 +61,7 @@ def load_data(path: str = DATA_PATH) -> pd.DataFrame:
     return df
 
 
-# ---------------------------------------------------------------------------
 # Training
-# ---------------------------------------------------------------------------
 def train_models(random_state: int = 42):
     """Train both classifiers and return trained objects + evaluation."""
     df = load_data()
@@ -94,7 +89,7 @@ def train_models(random_state: int = 42):
     lr_model.fit(X_train_vec, y_train)
     lr_preds = lr_model.predict(X_test_vec)
 
-    # ------------------ Evaluation ------------------
+    #  Evaluation 
     nb_acc = accuracy_score(y_test, nb_preds)
     lr_acc = accuracy_score(y_test, lr_preds)
 
